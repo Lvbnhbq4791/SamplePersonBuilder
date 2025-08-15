@@ -16,6 +16,7 @@ public class PersonBuilder {
     }
 
     public PersonBuilder setAge(int age) {
+        if (age < 0) throw new IllegalArgumentException("Возраст не может быть отрицательным");
         this.age = age;
         this.ageInput = true;
         return this;
@@ -27,8 +28,8 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        if (name == null || surname == null || age < 0) {
-            throw new IllegalArgumentException("Фамилия и Имя обязательны, Возраст не должен быть отрицательным");
+        if (name == null || surname == null ) {
+            throw new IllegalStateException("Фамилия и Имя обязательны");
         }
         Person person;
         if (!ageInput) person = new Person(name, surname);
